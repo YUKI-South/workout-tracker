@@ -7,6 +7,7 @@ GENDER = (
     ("other", "Other")
 )
 
+
 class CustomUser(AbstractUser):
     age = models.PositiveIntegerField(null=True, blank=True)
     gender = models.CharField(max_length=10, choices=GENDER, null=True, blank=True)
@@ -18,9 +19,8 @@ class CustomUser(AbstractUser):
         return self.username
 
 
-
 class Workout(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     date = models.DateField()
     exercise_type = models.CharField(max_length=100)
     weight = models.FloatField(null=True, blank=True)
